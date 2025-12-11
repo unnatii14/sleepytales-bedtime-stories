@@ -192,7 +192,5 @@
   **Made with ❤️ for sweet dreams and peaceful nights** 🌙✨
 
   **Version**: 1.0.0 | **Stories**: 35 | **Genres**: 7 | **Avg Rating**: 4.8⭐
-
-  Original Figma design: https://www.figma.com/design/gzXc8aRPBfKS0jsVnSi7Fq/SleepyTales-App-Design
   
   
