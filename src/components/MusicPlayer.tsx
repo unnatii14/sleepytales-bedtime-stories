@@ -238,9 +238,15 @@ export function MusicPlayer({ musicTracks, rhymes, onNavigate }: MusicPlayerProp
     } else {
       // Stop any other rhyme and play this one
       if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0;
-      }
+          audioRef.current.pause();
+          audioRef.current.currentTime = 0;
+          // Use Vite base URL for correct asset path
+          const base = import.meta.env.BASE_URL || '/';
+          audioRef.current.src = `${base}music/${rhyme.audio}`;
+          audioRef.current.volume = volume / 100;
+          // Play in user event to avoid autoplay restrictions
+          audioRef.current.play().catch(() => {});
+        }
       setRhymeList(rhymeList.map(r => ({
         ...r,
         isPlaying: r.id === rhymeId
@@ -248,16 +254,6 @@ export function MusicPlayer({ musicTracks, rhymes, onNavigate }: MusicPlayerProp
       setCurrentRhyme({ ...rhyme, isPlaying: true });
     }
   };
-
-  // Play rhyme audio when currentRhyme changes
-  useEffect(() => {
-    if (currentRhyme && audioRef.current) {
-      audioRef.current.src = `/music/${currentRhyme.audio}`;
-      audioRef.current.volume = volume / 100;
-      audioRef.current.currentTime = 0;
-      audioRef.current.play();
-    }
-  }, [currentRhyme]);
 
   // Update volume if changed while playing
   useEffect(() => {
@@ -404,7 +400,7 @@ export function MusicPlayer({ musicTracks, rhymes, onNavigate }: MusicPlayerProp
             <div className="mb-4">
               <h2 className="text-[#A8C7FF] text-lg font-semibold border-b border-[#5B84D8]/30 pb-2 mb-2">Nursery Rhymes</h2>
             </div>
-            {/* Audio element for rhyme playback */}
+            {/* Audio element for rhyme playback (always rendered, src set by play handler) */}
             <audio
               ref={audioRef}
               onEnded={() => {
