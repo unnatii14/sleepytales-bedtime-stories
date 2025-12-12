@@ -40,24 +40,36 @@ export function StoryPlayer({ story, allStories, onNavigate, onToggleFavorite, o
     .filter(s => s.id !== story.id && s.genre === story.genre)
     .slice(0, 3);
 
-  // Initialize text-to-speech with child-friendly voice
+  // Initialize text-to-speech with expressive, child-friendly voice
   useEffect(() => {
-    utterance.current = new SpeechSynthesisUtterance(storyContent);
-    utterance.current.lang = 'en-US';
-    utterance.current.rate = 0.8; // Slower, calmer pace
-    utterance.current.pitch = 1.3; // Higher pitch for softer, child-friendly voice
-    utterance.current.volume = 0.9; // Slightly softer volume
+    // Add natural pauses and emphasis for storytelling
+    let expressiveText = storyContent
+      // Add pauses after sentences for dramatic effect
+      .replace(/\. /g, '... ')
+      .replace(/! /g, '!... ')
+      .replace(/\? /g, '?... ')
+      // Add emphasis to exclamations and questions
+      .replace(/!/g, '!')
+      .replace(/\?/g, '?');
     
-    // Try to select a female voice (typically softer for children)
+    utterance.current = new SpeechSynthesisUtterance(expressiveText);
+    utterance.current.lang = 'en-US';
+    utterance.current.rate = 0.75; // Even slower for expressive storytelling
+    utterance.current.pitch = 1.4; // Higher, warmer pitch
+    utterance.current.volume = 0.95;
+    
+    // Try to select the most expressive, child-friendly voice
     const voices = synth.current.getVoices();
+    
+    // Prioritize voices known for better expression
     const childFriendlyVoice = voices.find(voice => 
-      voice.name.includes('Female') || 
-      voice.name.includes('Samantha') || 
-      voice.name.includes('Victoria') ||
-      voice.name.includes('Karen') ||
-      voice.name.includes('Zira') ||
-      (voice.lang.startsWith('en') && voice.name.toLowerCase().includes('female'))
-    );
+      voice.name.includes('Samantha') || // Mac - very expressive
+      voice.name.includes('Victoria') || // Windows - warm
+      voice.name.includes('Zira') || // Windows - friendly
+      voice.name.includes('Google UK English Female') || // Chrome - natural
+      voice.name.includes('Karen') || // iOS - pleasant
+      (voice.name.includes('Female') && voice.lang.startsWith('en'))
+    ) || voices.find(voice => voice.lang.startsWith('en') && voice.name.toLowerCase().includes('female'));
     
     if (childFriendlyVoice) {
       utterance.current.voice = childFriendlyVoice;
