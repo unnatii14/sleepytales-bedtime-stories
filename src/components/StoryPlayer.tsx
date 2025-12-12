@@ -18,6 +18,7 @@ export function StoryPlayer({ story, allStories, onNavigate, onToggleFavorite, o
   const [showTimer, setShowTimer] = useState(false);
   const [selectedTimer, setSelectedTimer] = useState<number | null>(null);
   const [autoScroll, setAutoScroll] = useState(false);
+  const [voicesLoaded, setVoicesLoaded] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const synth = useRef<SpeechSynthesis>(window.speechSynthesis);
   const utterance = useRef<SpeechSynthesisUtterance | null>(null);
@@ -40,8 +41,34 @@ export function StoryPlayer({ story, allStories, onNavigate, onToggleFavorite, o
     .filter(s => s.id !== story.id && s.genre === story.genre)
     .slice(0, 3);
 
+  // Load voices
+  useEffect(() => {
+    const loadVoices = () => {
+      const voices = synth.current.getVoices();
+      if (voices.length > 0) {
+        setVoicesLoaded(true);
+      }
+    };
+
+    // Load voices immediately
+    loadVoices();
+
+    // Some browsers load voices asynchronously
+    if (synth.current.onvoiceschanged !== undefined) {
+      synth.current.onvoiceschanged = loadVoices;
+    }
+
+    return () => {
+      if (synth.current.onvoiceschanged !== undefined) {
+        synth.current.onvoiceschanged = null;
+      }
+    };
+  }, []);
+
   // Initialize text-to-speech with expressive, child-friendly voice
   useEffect(() => {
+    if (!voicesLoaded) return;
+
     // Add natural pauses and emphasis for storytelling
     let expressiveText = storyContent
       // Add pauses after sentences for dramatic effect
@@ -58,8 +85,9 @@ export function StoryPlayer({ story, allStories, onNavigate, onToggleFavorite, o
     utterance.current.pitch = 1.4; // Higher, warmer pitch
     utterance.current.volume = 0.95;
     
-    // Try to select the most expressive, child-friendly voice
+    // Get available voices
     const voices = synth.current.getVoices();
+    console.log('Available voices:', voices.map(v => v.name));
     
     // Prioritize voices known for better expression
     const childFriendlyVoice = voices.find(voice => 
@@ -73,6 +101,7 @@ export function StoryPlayer({ story, allStories, onNavigate, onToggleFavorite, o
     
     if (childFriendlyVoice) {
       utterance.current.voice = childFriendlyVoice;
+      console.log('Selected voice:', childFriendlyVoice.name);
     }
     
     utterance.current.onend = () => {
@@ -82,7 +111,7 @@ export function StoryPlayer({ story, allStories, onNavigate, onToggleFavorite, o
     return () => {
       synth.current.cancel();
     };
-  }, [story.id, storyContent]);
+  }, [story.id, storyContent, voicesLoaded]);
 
   const togglePlayPause = () => {
     if (isPlaying) {
