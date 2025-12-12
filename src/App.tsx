@@ -32,7 +32,7 @@ export interface Rhyme {
   id: string;
   title: string;
   emoji: string;
-  lyrics: string;
+  audio: string; // MP3 filename in /music
   isPlaying: boolean;
 }
 
@@ -714,90 +714,20 @@ export default function App() {
   ]);
 
   const [rhymes] = useState<Rhyme[]>([
-    {
-      id: 'r1',
-      title: 'Twinkle Twinkle Little Star',
-      emoji: '⭐',
-      lyrics: 'Twinkle, twinkle, little star,\nHow I wonder what you are!\nUp above the world so high,\nLike a diamond in the sky.\nTwinkle, twinkle, little star,\nHow I wonder what you are!\n\nWhen the blazing sun is gone,\nWhen he nothing shines upon,\nThen you show your little light,\nTwinkle, twinkle, all the night.\nTwinkle, twinkle, little star,\nHow I wonder what you are!',
-      isPlaying: false
-    },
-    {
-      id: 'r2',
-      title: 'Baa Baa Black Sheep',
-      emoji: '🐑',
-      lyrics: 'Baa, baa, black sheep,\nHave you any wool?\nYes sir, yes sir,\nThree bags full.\n\nOne for the master,\nOne for the dame,\nAnd one for the little boy\nWho lives down the lane.\n\nBaa, baa, black sheep,\nHave you any wool?\nYes sir, yes sir,\nThree bags full.',
-      isPlaying: false
-    },
-    {
-      id: 'r3',
-      title: 'Old MacDonald Had a Farm',
-      emoji: '🚜',
-      lyrics: 'Old MacDonald had a farm, E-I-E-I-O!\nAnd on his farm he had a cow, E-I-E-I-O!\nWith a moo-moo here and a moo-moo there,\nHere a moo, there a moo, everywhere a moo-moo!\nOld MacDonald had a farm, E-I-E-I-O!\n\nOld MacDonald had a farm, E-I-E-I-O!\nAnd on his farm he had a pig, E-I-E-I-O!\nWith an oink-oink here and an oink-oink there,\nHere an oink, there an oink, everywhere an oink-oink!\nOld MacDonald had a farm, E-I-E-I-O!',
-      isPlaying: false
-    },
-    {
-      id: 'r4',
-      title: 'Mary Had a Little Lamb',
-      emoji: '🐑',
-      lyrics: 'Mary had a little lamb,\nLittle lamb, little lamb,\nMary had a little lamb,\nIts fleece was white as snow.\n\nAnd everywhere that Mary went,\nMary went, Mary went,\nEverywhere that Mary went,\nThe lamb was sure to go.\n\nIt followed her to school one day,\nSchool one day, school one day,\nIt followed her to school one day,\nWhich was against the rules.',
-      isPlaying: false
-    },
-    {
-      id: 'r5',
-      title: 'Humpty Dumpty',
-      emoji: '🥚',
-      lyrics: 'Humpty Dumpty sat on a wall,\nHumpty Dumpty had a great fall.\nAll the king\'s horses and all the king\'s men\nCouldn\'t put Humpty together again.\n\nHumpty Dumpty sat on a wall,\nHumpty Dumpty had a great fall.\nAll the king\'s horses and all the king\'s men\nCouldn\'t put Humpty together again.',
-      isPlaying: false
-    },
-    {
-      id: 'r6',
-      title: 'Jack and Jill',
-      emoji: '💧',
-      lyrics: 'Jack and Jill went up the hill\nTo fetch a pail of water.\nJack fell down and broke his crown,\nAnd Jill came tumbling after.\n\nUp Jack got, and home did trot,\nAs fast as he could caper.\nHe went to bed to mend his head\nWith vinegar and brown paper.',
-      isPlaying: false
-    },
-    {
-      id: 'r7',
-      title: 'Row Row Row Your Boat',
-      emoji: '🚣',
-      lyrics: 'Row, row, row your boat,\nGently down the stream.\nMerrily, merrily, merrily, merrily,\nLife is but a dream.\n\nRow, row, row your boat,\nGently down the stream.\nIf you see a crocodile,\nDon\'t forget to scream!\n\nRow, row, row your boat,\nGently down the stream.\nMerrily, merrily, merrily, merrily,\nLife is but a dream.',
-      isPlaying: false
-    },
-    {
-      id: 'r8',
-      title: 'Itsy Bitsy Spider',
-      emoji: '🕷️',
-      lyrics: 'The itsy bitsy spider\nClimbed up the water spout.\nDown came the rain\nAnd washed the spider out.\n\nOut came the sun\nAnd dried up all the rain.\nAnd the itsy bitsy spider\nClimbed up the spout again.',
-      isPlaying: false
-    },
-    {
-      id: 'r9',
-      title: 'Hickory Dickory Dock',
-      emoji: '🐭',
-      lyrics: 'Hickory dickory dock,\nThe mouse ran up the clock.\nThe clock struck one,\nThe mouse ran down,\nHickory dickory dock.\n\nHickory dickory dock,\nThe mouse ran up the clock.\nThe clock struck two,\nThe mouse said "Boo!"\nHickory dickory dock.',
-      isPlaying: false
-    },
-    {
-      id: 'r10',
-      title: 'London Bridge is Falling Down',
-      emoji: '🌉',
-      lyrics: 'London Bridge is falling down,\nFalling down, falling down.\nLondon Bridge is falling down,\nMy fair lady.\n\nBuild it up with wood and clay,\nWood and clay, wood and clay.\nBuild it up with wood and clay,\nMy fair lady.\n\nWood and clay will wash away,\nWash away, wash away.\nWood and clay will wash away,\nMy fair lady.',
-      isPlaying: false
-    },
-    {
-      id: 'r11',
-      title: 'Wheels on the Bus',
-      emoji: '🚌',
-      lyrics: 'The wheels on the bus go round and round,\nRound and round, round and round.\nThe wheels on the bus go round and round,\nAll through the town.\n\nThe wipers on the bus go swish, swish, swish,\nSwish, swish, swish, swish, swish, swish.\nThe wipers on the bus go swish, swish, swish,\nAll through the town.\n\nThe horn on the bus goes beep, beep, beep,\nBeep, beep, beep, beep, beep, beep.\nThe horn on the bus goes beep, beep, beep,\nAll through the town.',
-      isPlaying: false
-    },
-    {
-      id: 'r12',
-      title: 'If You\'re Happy and You Know It',
-      emoji: '👏',
-      lyrics: 'If you\'re happy and you know it, clap your hands!\nIf you\'re happy and you know it, clap your hands!\nIf you\'re happy and you know it,\nAnd you really want to show it,\nIf you\'re happy and you know it, clap your hands!\n\nIf you\'re happy and you know it, stomp your feet!\nIf you\'re happy and you know it, stomp your feet!\nIf you\'re happy and you know it,\nAnd you really want to show it,\nIf you\'re happy and you know it, stomp your feet!',
-      isPlaying: false
-    }
+    { id: 'r1', title: 'ABCD Song', emoji: '🔤', audio: 'nrt-1-abcd-Song.mp3', isPlaying: false },
+    { id: 'r2', title: 'I Am a Little Teapot', emoji: '🫖', audio: 'nrt-2-i-am-a-little-teapot.mp3', isPlaying: false },
+    { id: 'r3', title: 'Pat-a-Cake', emoji: '🎂', audio: 'nrt-3-pat-a-cake.mp3', isPlaying: false },
+    { id: 'r4', title: 'Row Row Row Your Boat', emoji: '🚣', audio: 'nrt-5-row-row-row-your-boat.mp3', isPlaying: false },
+    { id: 'r5', title: 'One Two Buckle My Shoe', emoji: '👞', audio: 'nrt-6-one-two-buckle-my-shoe.mp3', isPlaying: false },
+    { id: 'r6', title: 'Baa Baa Black Sheep', emoji: '🐑', audio: 'nrt-7-baa-baa-black-sheep.mp3', isPlaying: false },
+    { id: 'r7', title: 'Twinkle Twinkle Little Star', emoji: '⭐', audio: 'nrt-8-twinkle-twinkle-little-star.mp3', isPlaying: false },
+    { id: 'r8', title: 'Head Shoulders Knees and Toes', emoji: '🧑', audio: 'nrt-9-head-shoulders-knees-and-toes.mp3', isPlaying: false },
+    { id: 'r9', title: 'Hey Diddle Diddle', emoji: '🐄', audio: 'nrt-10-hey-diddle-diddle.mp3', isPlaying: false },
+    { id: 'r10', title: 'Hickory Dickory Dock', emoji: '🐭', audio: 'nrt-14-hickory-dickory-dock.mp3', isPlaying: false },
+    { id: 'r11', title: 'If You\'re Happy and You Know It', emoji: '👏', audio: 'nrt-17-if-youre-happy-and-you-know-it.mp3', isPlaying: false },
+    { id: 'r12', title: 'Wheels on the Bus', emoji: '🚌', audio: 'nrt-18-wheels-on-the-bus.mp3', isPlaying: false },
+    { id: 'r13', title: 'Old MacDonald Had a Farm', emoji: '🚜', audio: 'nrt-19-old-macdonald-had-a-farm.mp3', isPlaying: false },
+    { id: 'r14', title: 'Bingo', emoji: '🐶', audio: 'nrt-13-bingo.mp3', isPlaying: false },
   ]);
 
   const handleNavigate = (screen: Screen, story?: Story, genre?: string) => {

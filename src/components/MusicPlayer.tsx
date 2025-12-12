@@ -37,6 +37,7 @@ export function MusicPlayer({ musicTracks, rhymes, onNavigate }: MusicPlayerProp
   const [activeTab, setActiveTab] = useState<'sounds' | 'rhymes'>('rhymes');
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [selectedVoiceURI, setSelectedVoiceURI] = useState<string>('');
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const oscillatorRef = useRef<OscillatorNode | null>(null);
   const gainNodeRef = useRef<GainNode | null>(null);
@@ -230,38 +231,30 @@ export function MusicPlayer({ musicTracks, rhymes, onNavigate }: MusicPlayerProp
 
     if (currentRhyme?.id === rhymeId && currentRhyme.isPlaying) {
       // Stop playing
-      synthRef.current.cancel();
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
       setRhymeList(rhymeList.map(r => ({ ...r, isPlaying: false })));
       setCurrentRhyme(null);
     } else {
       // Stop any other rhyme and play this one
-      synthRef.current.cancel();
-
-      utteranceRef.current = new SpeechSynthesisUtterance(rhyme.lyrics);
-      utteranceRef.current.lang = 'en-US';
-      utteranceRef.current.rate = 0.92; // slightly faster for more natural
-      utteranceRef.current.pitch = 1.4; // higher pitch for childlike
-      utteranceRef.current.volume = volume / 100;
-
-      // Use selected voice if available
-      const allVoices = synthRef.current.getVoices();
-      const selected = allVoices.find(v => v.voiceURI === selectedVoiceURI) || allVoices[0];
-      if (selected) {
-        utteranceRef.current.voice = selected;
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
       }
-
-      utteranceRef.current.onend = () => {
-        setRhymeList(rhymeList.map(r => ({ ...r, isPlaying: false })));
-        setCurrentRhyme(null);
-      };
-
-      synthRef.current.speak(utteranceRef.current);
 
       setRhymeList(rhymeList.map(r => ({
         ...r,
         isPlaying: r.id === rhymeId
       })));
       setCurrentRhyme({ ...rhyme, isPlaying: true });
+      setTimeout(() => {
+        if (audioRef.current) {
+          audioRef.current.volume = volume / 100;
+          audioRef.current.play();
+        }
+      }, 100);
     }
   };
 
@@ -399,21 +392,16 @@ export function MusicPlayer({ musicTracks, rhymes, onNavigate }: MusicPlayerProp
       {/* Nursery Rhymes Section */}
       {activeTab === 'rhymes' && (
         <>
-          {/* Voice Picker */}
-          <div className="mb-6 flex flex-col sm:flex-row items-center gap-3">
-            <label className="text-[#A8C7FF] text-sm font-medium mr-2">Choose Voice:</label>
-            <select
-              className="bg-[#162B5B] border border-[#5B84D8]/40 text-[#F8EDEB] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#5B84D8]"
-              value={selectedVoiceURI}
-              onChange={e => setSelectedVoiceURI(e.target.value)}
-            >
-              {voices.map(v => (
-                <option key={v.voiceURI} value={v.voiceURI}>
-                  {v.name} {v.lang ? `(${v.lang})` : ''}
-                </option>
-              ))}
-            </select>
-          </div>
+          {/* Audio element for rhyme playback */}
+          <audio
+            ref={audioRef}
+            src={currentRhyme ? `/music/${currentRhyme.audio}` : undefined}
+            onEnded={() => {
+              setRhymeList(rhymeList.map(r => ({ ...r, isPlaying: false })));
+              setCurrentRhyme(null);
+            }}
+            style={{ display: 'none' }}
+          />
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {rhymeList.map((rhyme, index) => (
               <motion.button
