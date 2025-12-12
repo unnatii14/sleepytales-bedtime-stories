@@ -1,0 +1,21 @@
+{
+  "name": "SleepyTales",
+  "short_name": "SleepyTales",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0B2545",
+  "theme_color": "#5B84D8",
+  "description": "Bedtime stories and music for kids.",
+  "icons": [
+    {
+      "src": "icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

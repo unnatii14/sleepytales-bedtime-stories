@@ -1,10 +1,22 @@
 
-  import { defineConfig } from 'vite';
-  import react from '@vitejs/plugin-react-swc';
-  import path from 'path';
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react-swc';
+import { VitePWA } from 'vite-plugin-pwa';
+import path from 'path';
 
-  export default defineConfig({
-    plugins: [react()],
+export default defineConfig({
+  plugins: [
+    react(),
+    VitePWA({
+      registerType: 'autoUpdate',
+      manifest: require('./public/manifest.json'),
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,png,svg,mp3,ico}'],
+        maximumFileSizeToCacheInBytes: 10 * 1024 * 1024, // 10 MB
+      },
+      includeAssets: ['favicon.ico', 'icons/icon-192x192.png', 'icons/icon-512x512.png'],
+    }),
+  ],
     base: '/sleepytales-bedtime-stories/',
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
