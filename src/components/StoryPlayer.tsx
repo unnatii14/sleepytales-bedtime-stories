@@ -40,12 +40,28 @@ export function StoryPlayer({ story, allStories, onNavigate, onToggleFavorite, o
     .filter(s => s.id !== story.id && s.genre === story.genre)
     .slice(0, 3);
 
-  // Initialize text-to-speech
+  // Initialize text-to-speech with child-friendly voice
   useEffect(() => {
     utterance.current = new SpeechSynthesisUtterance(storyContent);
     utterance.current.lang = 'en-US';
-    utterance.current.rate = 0.85;
-    utterance.current.pitch = 1.1;
+    utterance.current.rate = 0.8; // Slower, calmer pace
+    utterance.current.pitch = 1.3; // Higher pitch for softer, child-friendly voice
+    utterance.current.volume = 0.9; // Slightly softer volume
+    
+    // Try to select a female voice (typically softer for children)
+    const voices = synth.current.getVoices();
+    const childFriendlyVoice = voices.find(voice => 
+      voice.name.includes('Female') || 
+      voice.name.includes('Samantha') || 
+      voice.name.includes('Victoria') ||
+      voice.name.includes('Karen') ||
+      voice.name.includes('Zira') ||
+      (voice.lang.startsWith('en') && voice.name.toLowerCase().includes('female'))
+    );
+    
+    if (childFriendlyVoice) {
+      utterance.current.voice = childFriendlyVoice;
+    }
     
     utterance.current.onend = () => {
       setIsPlaying(false);
