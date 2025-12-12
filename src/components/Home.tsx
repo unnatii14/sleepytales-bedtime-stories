@@ -14,13 +14,13 @@ export function Home({ onNavigate, recentStories }: HomeProps) {
     .slice(0, 5);
 
   const genres = [
-    { name: 'Animals', emoji: '🐾', count: 8 },
+    { name: 'Animals', emoji: '🐾', count: 13 },
     { name: 'Space', emoji: '🚀', count: 4 },
-    { name: 'Magical world', emoji: '✨', count: 3 },
-    { name: 'Adventures', emoji: '🗺️', count: 5 },
-    { name: 'Fairy tales', emoji: '👸', count: 3 },
-    { name: 'Moral stories', emoji: '💭', count: 5 },
-    { name: 'Nature stories', emoji: '🌿', count: 7 }
+    { name: 'Magical world', emoji: '✨', count: 5 },
+    { name: 'Adventures', emoji: '🗺️', count: 8 },
+    { name: 'Fairy tales', emoji: '👸', count: 18 },
+    { name: 'Moral stories', emoji: '💭', count: 6 },
+    { name: 'Nature stories', emoji: '🌿', count: 6 }
   ];
 
   return (
