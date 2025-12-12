@@ -87,21 +87,40 @@ export function StoryPlayer({ story, allStories, onNavigate, onToggleFavorite, o
     
     // Get available voices
     const voices = synth.current.getVoices();
-    console.log('Available voices:', voices.map(v => v.name));
+    console.log('Available voices:', voices.map(v => `${v.name} (${v.lang})`));
     
     // Prioritize voices known for better expression
-    const childFriendlyVoice = voices.find(voice => 
+    let childFriendlyVoice = voices.find(voice => 
       voice.name.includes('Samantha') || // Mac - very expressive
       voice.name.includes('Victoria') || // Windows - warm
       voice.name.includes('Zira') || // Windows - friendly
       voice.name.includes('Google UK English Female') || // Chrome - natural
-      voice.name.includes('Karen') || // iOS - pleasant
-      (voice.name.includes('Female') && voice.lang.startsWith('en'))
-    ) || voices.find(voice => voice.lang.startsWith('en') && voice.name.toLowerCase().includes('female'));
+      voice.name.includes('Karen') // iOS - pleasant
+    );
+
+    // Fallback to any English female voice
+    if (!childFriendlyVoice) {
+      childFriendlyVoice = voices.find(voice => 
+        voice.lang.startsWith('en') && 
+        (voice.name.toLowerCase().includes('female') || voice.name.toLowerCase().includes('woman'))
+      );
+    }
+
+    // Fallback to any English voice
+    if (!childFriendlyVoice) {
+      childFriendlyVoice = voices.find(voice => voice.lang.startsWith('en'));
+    }
+
+    // Fallback to default voice
+    if (!childFriendlyVoice && voices.length > 0) {
+      childFriendlyVoice = voices[0];
+    }
     
     if (childFriendlyVoice) {
       utterance.current.voice = childFriendlyVoice;
       console.log('Selected voice:', childFriendlyVoice.name);
+    } else {
+      console.log('Using default system voice');
     }
     
     utterance.current.onend = () => {
@@ -114,18 +133,22 @@ export function StoryPlayer({ story, allStories, onNavigate, onToggleFavorite, o
   }, [story.id, storyContent, voicesLoaded]);
 
   const togglePlayPause = () => {
+    if (!voicesLoaded) {
+      console.log('Voices not loaded yet');
+      return;
+    }
+
     if (isPlaying) {
-      synth.current.pause();
+      // Stop instead of pause for better browser compatibility
+      synth.current.cancel();
       setIsPlaying(false);
     } else {
-      if (synth.current.paused) {
-        synth.current.resume();
-      } else {
-        if (utterance.current) {
-          synth.current.speak(utterance.current);
-        }
+      // Always recreate utterance for reliability
+      if (utterance.current) {
+        synth.current.cancel(); // Clear any existing speech
+        synth.current.speak(utterance.current);
+        setIsPlaying(true);
       }
-      setIsPlaying(true);
     }
   };
 
