@@ -417,6 +417,282 @@ export default function App() {
       text: 'In a quiet forest lived a rabbit named Riley who worried about everything. "What if it rains? What if I can\'t find food? What if I get lost?"\n\nOne evening, feeling overwhelmed, Riley visited the wise old owl named Oliver.\n\n"I can\'t stop worrying," Riley admitted sadly.\n\nOliver hooted softly. "Tell me, little friend, are you in danger right now?"\n\nRiley looked around. "No…"\n\n"Do you have a safe burrow?"\n\n"Yes…"\n\n"Do you have food for today?"\n\n"Yes," Riley said again.\n\nOliver smiled gently. "Then right now, in this moment, you are safe. Tomorrow\'s worries belong to tomorrow. Today\'s job is simply to enjoy today."\n\nRiley took a deep breath and felt lighter. That evening, instead of worrying, he watched the fireflies dance, listened to the crickets sing, and enjoyed the cool breeze.\n\nWhen bedtime came, Riley realized he\'d had a wonderful day—all because he chose to focus on the present moment.\n\n✨ Moral: Don\'t let tomorrow\'s worries steal today\'s peace.',
       rating: 4.9,
       isFavorite: false
+    },
+    // Classic Fairy Tales & Famous Stories
+    {
+      id: '36',
+      title: 'Cinderella',
+      genre: 'Fairy tales',
+      duration: '6 min',
+      ageRange: '4-8',
+      coverImage: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=600',
+      text: 'Once upon a time, in a land far away, lived a kind and beautiful girl named Cinderella. After her father passed away, she lived with her stepmother and two stepsisters who treated her unkindly, making her do all the housework.\n\nOne day, an invitation arrived from the palace—the Prince was hosting a grand ball to find a bride! Cinderella\'s stepsisters were excited, but they laughed at her. "You? At the ball? In those rags?"\n\nCinderella cried alone in the garden. Suddenly, a gentle glow appeared, and her Fairy Godmother stood before her. "Don\'t cry, dear child. You shall go to the ball!"\n\nWith a wave of her wand, a pumpkin became a golden carriage, mice turned into horses, and Cinderella\'s worn dress transformed into the most beautiful gown with sparkling glass slippers.\n\n"Remember," warned the Fairy Godmother, "the magic ends at midnight!"\n\nAt the ball, Cinderella danced with the Prince, who fell instantly in love. But as the clock struck twelve, she fled, leaving behind only one glass slipper.\n\nThe Prince searched the entire kingdom until he found Cinderella. The slipper fit perfectly! They married and lived happily ever after.\n\n✨ Moral: Kindness and goodness are always rewarded.',
+      rating: 5.0,
+      isFavorite: false
+    },
+    {
+      id: '37',
+      title: 'Aladdin and the Magic Lamp',
+      genre: 'Magical world',
+      duration: '6 min',
+      ageRange: '4-8',
+      coverImage: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?w=600',
+      text: 'In the bustling city of Agrabah lived a clever young man named Aladdin. Though poor, he had a heart of gold and dreamed of a better life.\n\nOne day, a mysterious sorcerer asked Aladdin to fetch an old lamp from a magical cave. "Touch nothing but the lamp," he warned.\n\nInside the cave, Aladdin found mountains of treasure! He grabbed the dusty lamp, but when he tried to leave, the cave began to collapse. Trapped inside, Aladdin rubbed the lamp to clean it—and WHOOSH! A magical Genie appeared!\n\n"I am the Genie of the lamp! You have three wishes, Master!"\n\nAladdin wished to become a prince so he could meet the beautiful Princess Jasmine. The Genie transformed him magnificently! Aladdin flew to the palace on a magic carpet and won Jasmine\'s heart with his kindness and humor.\n\nWhen the evil sorcerer tried to steal the lamp, Aladdin outsmarted him with bravery and cleverness. In the end, Aladdin used his final wish to free the Genie.\n\n"You\'re my friend," Aladdin said. "You deserve to be free."\n\nAladdin married Jasmine, and they ruled the kingdom with kindness and wisdom.\n\n✨ Moral: True wealth is found in friendship and a good heart.',
+      rating: 5.0,
+      isFavorite: false
+    },
+    {
+      id: '38',
+      title: 'Snow White and the Seven Dwarfs',
+      genre: 'Fairy tales',
+      duration: '6 min',
+      ageRange: '4-8',
+      coverImage: 'https://images.unsplash.com/photo-1509281373149-e957c6296406?w=600',
+      text: 'Once upon a time, a beautiful princess named Snow White lived with her jealous stepmother, the Queen. Every day, the Queen asked her magic mirror, "Mirror, mirror on the wall, who is the fairest of them all?"\n\nWhen the mirror answered "Snow White," the Queen was furious! Snow White fled into the forest, where she discovered a tiny cottage belonging to seven friendly dwarfs: Doc, Grumpy, Happy, Sleepy, Bashful, Sneezy, and Dopey.\n\nThe dwarfs welcomed her warmly. Snow White cooked and cleaned while they worked in the diamond mines. But the Queen discovered Snow White was alive and disguised herself as an old woman selling apples.\n\n"Try this beautiful apple, dear," she offered. Snow White took one bite of the poisoned fruit and fell into a deep sleep.\n\nThe heartbroken dwarfs placed her in a glass coffin. One day, a kind Prince who had heard of her beauty came to pay his respects. Moved by her peaceful face, he kissed her gently—and the spell broke!\n\nSnow White awoke, and they all celebrated joyfully. She married the Prince and lived happily ever after with her dwarf friends always welcome at the palace.\n\n✨ Moral: Kindness creates lasting friendships that protect us.',
+      rating: 4.9,
+      isFavorite: false
+    },
+    {
+      id: '39',
+      title: 'The Little Mermaid',
+      genre: 'Fairy tales',
+      duration: '6 min',
+      ageRange: '4-8',
+      coverImage: 'https://images.unsplash.com/photo-1544552866-d3ed42536cfd?w=600',
+      text: 'Deep beneath the ocean waves lived a young mermaid princess named Ariel. She had a beautiful voice and a curious heart that longed to explore the world above the sea.\n\nOne stormy night, Ariel saved a handsome prince from drowning and fell deeply in love. She dreamed of walking on land and meeting him again.\n\nAriel visited the Sea Witch, who offered a deal: "I\'ll give you human legs, but you must give me your beautiful voice. You have three days to make the prince fall in love, or you\'ll belong to me forever."\n\nAriel agreed and became human. Though she couldn\'t speak, her kindness, grace, and sparkling eyes captured the prince\'s attention. They spent wonderful days together—exploring the kingdom, dancing, and sharing quiet moments.\n\nOn the third day, as the sun was setting, the prince realized the truth. "It was you who saved me! I heard your voice in my dreams!"\n\nAriel\'s father, King Triton, seeing his daughter\'s true love, used his powerful trident to break the witch\'s spell. Ariel\'s voice returned, and she was given the choice to stay human.\n\nAriel and the prince married, uniting the land and sea in harmony.\n\n✨ Moral: Follow your heart, but never lose who you truly are.',
+      rating: 5.0,
+      isFavorite: false
+    },
+    {
+      id: '40',
+      title: 'Beauty and the Beast',
+      genre: 'Fairy tales',
+      duration: '6 min',
+      ageRange: '4-8',
+      coverImage: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=600',
+      text: 'Once upon a time, a merchant got lost in a storm and found shelter in an enchanted castle. When he picked a rose for his daughter Belle, a terrifying Beast appeared!\n\n"You stole from me! Now you must stay forever!" roared the Beast.\n\nBrave Belle offered to take her father\'s place. At first, she was frightened, but she discovered the Beast wasn\'t cruel—just lonely. He gave her a beautiful library, and they spent hours reading together.\n\nSlowly, Belle saw past the Beast\'s scary appearance. She noticed his gentle eyes, his kind gestures, and his caring heart. They danced in the ballroom, walked in the garden, and became true friends.\n\nOne day, Belle saw her sick father in a magic mirror. "Please, let me go to him," she begged.\n\nThe Beast, though heartbroken, let her leave. "I love you, Belle. Be happy."\n\nBelle realized she loved him too! She rushed back just as the last petal fell from an enchanted rose. "I love you!" she cried.\n\nMagic swirled around them, and the Beast transformed into a handsome prince! The curse was broken by true love. They lived happily ever after.\n\n✨ Moral: True beauty is found within the heart.',
+      rating: 5.0,
+      isFavorite: false
+    },
+    {
+      id: '41',
+      title: 'Sleeping Beauty',
+      genre: 'Fairy tales',
+      duration: '5 min',
+      ageRange: '4-8',
+      coverImage: 'https://images.unsplash.com/photo-1520262494112-9fe481d36ec3?w=600',
+      text: 'Long ago, a king and queen celebrated the birth of their daughter, Princess Aurora. They invited everyone to the celebration—except one: the evil fairy Maleficent.\n\nFurious at being excluded, Maleficent appeared and cast a terrible curse: "Before the sun sets on her sixteenth birthday, she will prick her finger on a spinning wheel and die!"\n\nA good fairy softened the curse: Aurora would not die, but fall into a deep sleep, awakened only by true love\'s kiss.\n\nThe worried king burned every spinning wheel in the kingdom, and three good fairies raised Aurora in a hidden cottage, calling her Briar Rose. She grew up kind, gentle, and with a voice so sweet that birds sang with her.\n\nOn her sixteenth birthday, Maleficent\'s magic found Aurora. A spinning wheel appeared, and Aurora pricked her finger, falling into a deep sleep. The entire kingdom slumbered with her.\n\nYears later, a brave prince learned of the sleeping princess. He fought through thorns and finally reached Aurora. With a gentle kiss filled with true love, she awoke!\n\nThe kingdom rejoiced, and Aurora and the prince lived happily ever after.\n\n✨ Moral: Good will always triumph over evil, and love conquers all.',
+      rating: 4.9,
+      isFavorite: false
+    },
+    {
+      id: '42',
+      title: 'Rapunzel',
+      genre: 'Fairy tales',
+      duration: '5 min',
+      ageRange: '4-8',
+      coverImage: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600',
+      text: 'In a tall tower hidden in the forest lived a girl named Rapunzel with the longest, most magical golden hair you could imagine. A witch named Mother Gothel kept her locked away, using her hair\'s healing powers to stay young forever.\n\n"Rapunzel, Rapunzel, let down your hair!" Gothel would call, climbing up the golden locks.\n\nRapunzel spent her days reading, painting, and dreaming of the floating lights that appeared every year on her birthday. "Someday, I\'ll see them up close," she wished.\n\nOne day, a young adventurer named Flynn Rider climbed into her tower while escaping guards. At first scared, Rapunzel made a deal: "Take me to see the floating lights, and I\'ll return what you seek."\n\nThey journeyed together, and Rapunzel experienced the world—flowers, sunshine, friendly people, and laughter. On her birthday night, they floated in a boat surrounded by thousands of glowing lanterns—released by the king and queen for their lost daughter.\n\nRapunzel discovered she WAS the lost princess! Her real parents had released those lights every year, hoping she\'d return.\n\nWith courage and friends, Rapunzel defeated Gothel and reunited with her family. She and Flynn lived happily ever after.\n\n✨ Moral: Never stop dreaming—the world is waiting for you.',
+      rating: 5.0,
+      isFavorite: false
+    },
+    {
+      id: '43',
+      title: 'The Lion King',
+      genre: 'Animals',
+      duration: '6 min',
+      ageRange: '4-8',
+      coverImage: 'https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?w=600',
+      text: 'On Pride Rock in the African savanna, a lion cub named Simba was born to King Mufasa and Queen Sarabi. All the animals gathered to celebrate the future king.\n\nMufasa taught Simba about the Circle of Life: "Everything is connected. One day, you will be king and protect this balance."\n\nBut Simba\'s jealous uncle, Scar, wanted the throne. He tricked Simba into a dangerous gorge where a wildebeest stampede thundered through. Mufasa saved Simba but fell. Scar blamed young Simba and told him to run away.\n\nHeartbroken and ashamed, Simba fled to the jungle, where he met Timon and Pumbaa. They taught him "Hakuna Matata"—no worries! Simba grew up carefree, trying to forget his past.\n\nYears later, his childhood friend Nala found him. "Simba, you must return! Scar has destroyed the Pride Lands!"\n\nSimba was afraid, but wise Rafiki showed him that Mufasa lived on in him. Looking at his reflection, Simba heard his father\'s voice: "Remember who you are."\n\nSimba returned, defeated Scar, and took his rightful place as king. The Pride Lands flourished once more, and the Circle of Life continued.\n\n✨ Moral: We must face our past to embrace our future.',
+      rating: 5.0,
+      isFavorite: false
+    },
+    {
+      id: '44',
+      title: 'Finding Nemo',
+      genre: 'Animals',
+      duration: '6 min',
+      ageRange: '3-7',
+      coverImage: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600',
+      text: 'In the Great Barrier Reef lived a clownfish named Marlin and his only son, Nemo. Marlin was very protective—too protective, Nemo thought.\n\n"Dad, I can do things by myself!" Nemo complained on his first day of school.\n\nTo prove himself, Nemo swam too far and was caught by a scuba diver! Marlin watched helplessly as his son disappeared.\n\n"I have to find him!" Determined, Marlin set off across the ocean. He met Dory, a forgetful but cheerful blue fish. "I suffer from short-term memory loss, but I\'ll help you find your son!"\n\nTogether, they faced sharks, jellyfish, and a whale\'s belly! Meanwhile, Nemo ended up in a fish tank in Sydney. He made friends who helped him plan an escape.\n\n"All drains lead to the ocean!" they discovered.\n\nMarlin and Dory finally reached Sydney Harbor. "Nemo! I\'m here!"\n\nFather and son reunited joyfully. Marlin learned to let Nemo take risks, and Nemo understood his father\'s love. They swam home together, with Dory happily tagging along.\n\n"Just keep swimming, just keep swimming!" she sang.\n\n✨ Moral: Love means trusting others to find their own way.',
+      rating: 5.0,
+      isFavorite: false
+    },
+    {
+      id: '45',
+      title: 'Frozen - The Tale of Two Sisters',
+      genre: 'Magical world',
+      duration: '6 min',
+      ageRange: '4-8',
+      coverImage: 'https://images.unsplash.com/photo-1491002052546-bf38f186af56?w=600',
+      text: 'In the kingdom of Arendelle lived two princess sisters: Elsa and Anna. Elsa had a secret—she could create ice and snow with her hands! But after accidentally hurting Anna as children, Elsa hid away, afraid of her own powers.\n\nYears later, on Elsa\'s coronation day, her powers were revealed to everyone. Frightened and overwhelmed, she ran into the mountains and built a magnificent ice palace, accidentally plunging Arendelle into eternal winter.\n\nBrave Anna set off to find her sister. Along the way, she met Kristoff, his reindeer Sven, and a magical snowman named Olaf who dreamed of summer.\n\n"Some people are worth melting for!" Olaf said warmly.\n\nAnna found Elsa and tried to bring her home, but Elsa accidentally struck Anna\'s heart with ice. Only an act of true love could save her!\n\nAs Anna was freezing, she saw Elsa in danger. Instead of saving herself, Anna threw herself in front of Elsa—and turned to ice. But her sacrifice WAS the act of true love! Anna thawed, and Elsa realized love was the key to controlling her powers.\n\nElsa brought back summer, and the sisters finally hugged after years apart. Arendelle celebrated, and the palace gates stayed open forever.\n\n✨ Moral: True love, especially between family, can thaw the coldest heart.',
+      rating: 5.0,
+      isFavorite: false
+    },
+    {
+      id: '46',
+      title: 'Pinocchio',
+      genre: 'Fairy tales',
+      duration: '5 min',
+      ageRange: '4-8',
+      coverImage: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600',
+      text: 'Old woodcarver Geppetto was lonely, so he carved a puppet and named him Pinocchio. That night, the Blue Fairy visited and brought Pinocchio to life!\n\n"Prove yourself brave, truthful, and unselfish, and someday you\'ll be a real boy," she said, assigning Jiminy Cricket as his conscience.\n\nPinocchio started school but was easily led astray. When he lied about his adventures, his nose grew longer and longer! "A lie keeps growing until it\'s as plain as the nose on your face," warned the fairy.\n\nPinocchio was tricked into going to Pleasure Island, where naughty boys turned into donkeys! He barely escaped, growing donkey ears as a warning.\n\nWorse, he discovered Geppetto had been swallowed by a giant whale while searching for him! Brave Pinocchio dove into the ocean to save his father. Inside the whale, they built a fire, making the whale sneeze them out!\n\nSwimming to shore, Pinocchio saved Geppetto but collapsed from exhaustion. The Blue Fairy appeared one last time.\n\n"You have proven yourself brave, truthful, and unselfish. Awake, Pinocchio—as a REAL boy!"\n\nGeppetto hugged his real son, tears of joy streaming down his face.\n\n✨ Moral: Honesty and bravery make us who we truly are.',
+      rating: 4.9,
+      isFavorite: false
+    },
+    {
+      id: '47',
+      title: 'The Jungle Book',
+      genre: 'Animals',
+      duration: '6 min',
+      ageRange: '4-8',
+      coverImage: 'https://images.unsplash.com/photo-1518173946687-a4c036bc6d20?w=600',
+      text: 'Deep in the Indian jungle, a wolf pack discovered a human baby and named him Mowgli. He grew up among the animals, learning the ways of the jungle from Bagheera the wise panther and Baloo the fun-loving bear.\n\n"Look for the bare necessities, the simple bare necessities!" Baloo sang, teaching Mowgli to enjoy life.\n\nBut danger lurked—Shere Khan, the fierce tiger, hated humans and wanted Mowgli gone. "The man-cub must leave before I find him!"\n\nMowgli didn\'t want to leave his jungle family. Along the way, he encountered Kaa the hypnotic snake and King Louie, a monkey who wanted to learn the secret of fire.\n\nWhen Shere Khan attacked, brave Mowgli stood his ground. Using fire—man\'s one advantage—he scared the tiger away, saving his friends.\n\nBut Mowgli realized something important. Seeing a village girl, he felt drawn to his own kind. His animal friends understood.\n\n"Go on, little brother," Bagheera said gently. "You belong with your own people now."\n\nWith love in his heart, Mowgli walked toward the village—but he would never forget his jungle family, and they would always be watching over him.\n\n✨ Moral: Home is where you\'re loved, no matter where that may be.',
+      rating: 4.9,
+      isFavorite: false
+    },
+    {
+      id: '48',
+      title: 'Peter Pan',
+      genre: 'Adventures',
+      duration: '6 min',
+      ageRange: '4-8',
+      coverImage: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?w=600',
+      text: 'One magical night, Peter Pan flew through the window of the Darling children—Wendy, John, and Michael. "Come with me to Neverland, where you never grow up!"\n\n"All you need is faith, trust, and a little pixie dust!" sprinkled Tinker Bell, the tiny fairy.\n\nSoon they were flying over London, past the stars, to the magical island of Neverland! There, Peter introduced them to the Lost Boys—children who had no parents and never aged.\n\nBut danger waited: Captain Hook, the villainous pirate who lost his hand to Peter (and to a hungry crocodile!). "I\'ll have my revenge on Peter Pan!" Hook plotted.\n\nWendy became like a mother to the Lost Boys, telling them bedtime stories. But she began to miss home. When Hook captured the children, Peter Pan flew to the rescue!\n\nIn an exciting sword fight on the pirate ship, Peter defeated Hook. "Take that, you codfish!" The crocodile chased Hook into the sea, tick-tock, tick-tock!\n\nWendy, John, and Michael decided to go home, but they never forgot Neverland. Peter promised to return for spring cleaning—and to hear Wendy\'s stories.\n\n"To live will be an awfully big adventure," Peter said, flying back to his island of dreams.\n\n✨ Moral: Growing up is part of life, but keep your imagination alive.',
+      rating: 4.9,
+      isFavorite: false
+    },
+    {
+      id: '49',
+      title: 'Hansel and Gretel',
+      genre: 'Fairy tales',
+      duration: '5 min',
+      ageRange: '4-8',
+      coverImage: 'https://images.unsplash.com/photo-1481391319762-47dff72954d9?w=600',
+      text: 'In a small cottage near a dark forest lived Hansel and Gretel with their poor father and cruel stepmother. When food ran out, the stepmother convinced their father to abandon the children in the woods.\n\nClever Hansel dropped pebbles along the path and led Gretel home. But the second time, he only had breadcrumbs, which birds ate! The children were truly lost.\n\nWandering deeper into the forest, they discovered an amazing sight—a house made entirely of candy! Gingerbread walls, candy cane pillars, and frosting snow!\n\n"Nibble, nibble, little mouse, who is nibbling at my house?" croaked a voice. An old witch appeared, her eyes glittering.\n\nShe trapped Hansel in a cage to fatten him up and made Gretel her servant. "When he\'s plump enough, I\'ll eat him!" she cackled.\n\nBrave Gretel made a plan. When the witch checked the oven, Gretel pushed her in and slammed the door! She freed Hansel, and they discovered the witch\'s treasure.\n\nThe children found their way home. Their stepmother had left, and their father wept with joy. With the treasure, they never went hungry again.\n\n✨ Moral: Bravery and cleverness can overcome any danger.',
+      rating: 4.8,
+      isFavorite: false
+    },
+    {
+      id: '50',
+      title: 'The Three Little Pigs',
+      genre: 'Fairy tales',
+      duration: '4 min',
+      ageRange: '2-6',
+      coverImage: 'https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=600',
+      text: 'Once upon a time, three little pig brothers set out to build their own houses.\n\nThe first pig was lazy. "I\'ll build my house of straw—quick and easy!" And he played all day.\n\nThe second pig was a little lazy too. "I\'ll use sticks—faster than bricks!" And he played most of the day.\n\nThe third pig worked hard. "I\'ll build with bricks. It takes longer, but it will be strong!" He worked all day.\n\nSoon, the Big Bad Wolf came! "Little pig, little pig, let me come in!"\n\n"Not by the hair on my chinny chin chin!"\n\n"Then I\'ll huff, and I\'ll puff, and I\'ll BLOW your house down!" The straw house flew apart, and the first pig ran to his brother\'s stick house.\n\nThe wolf huffed and puffed—and blew that house down too! Both pigs ran to the brick house.\n\nThe wolf huffed and puffed and PUFFED... but the brick house stood strong! Angry, he climbed down the chimney—but the clever pigs had a pot of hot water waiting! The wolf yelped and ran away forever.\n\nThe three pigs lived safely in the brick house, and the lazy brothers learned an important lesson.\n\n✨ Moral: Hard work and planning keep us safe.',
+      rating: 4.9,
+      isFavorite: false
+    },
+    {
+      id: '51',
+      title: 'Little Red Riding Hood',
+      genre: 'Fairy tales',
+      duration: '4 min',
+      ageRange: '3-7',
+      coverImage: 'https://images.unsplash.com/photo-1476820865390-c52aeebb9891?w=600',
+      text: 'Once upon a time, a sweet girl always wore a red hooded cape, so everyone called her Little Red Riding Hood. One day, her mother said, "Take this basket of treats to Grandma\'s house. Stay on the path!"\n\nSkipping through the forest, Red met a wolf. "Where are you going, little girl?" he asked sweetly.\n\n"To Grandma\'s house!" Red answered, not knowing wolves were dangerous.\n\nThe wolf raced ahead and swallowed poor Grandma whole! He put on her nightgown and waited in bed.\n\nWhen Red arrived, something seemed strange. "Grandma, what big eyes you have!"\n\n"All the better to see you with!"\n\n"What big ears you have!"\n\n"All the better to hear you with!"\n\n"What big TEETH you have!"\n\n"All the better to EAT you with!" The wolf leaped—but just then, a woodcutter burst through the door!\n\nThe brave woodcutter scared the wolf, who coughed up Grandma, completely unharmed! The wolf ran away and never bothered anyone again.\n\nRed hugged Grandma and the woodcutter. "I\'ll always stay on the path and never talk to strangers!"\n\n✨ Moral: Listen to your parents and be careful of strangers.',
+      rating: 4.8,
+      isFavorite: false
+    },
+    {
+      id: '52',
+      title: 'Goldilocks and the Three Bears',
+      genre: 'Fairy tales',
+      duration: '4 min',
+      ageRange: '2-6',
+      coverImage: 'https://images.unsplash.com/photo-1589656966895-2f33e7653819?w=600',
+      text: 'Once upon a time, three bears lived in a cozy cottage: Papa Bear, Mama Bear, and Baby Bear. One morning, they went for a walk while their porridge cooled.\n\nA curious girl named Goldilocks wandered by. "What a cute house!" She walked right in without knocking.\n\nOn the table sat three bowls of porridge. She tasted Papa Bear\'s—"Too hot!" Mama Bear\'s—"Too cold!" Baby Bear\'s—"Just right!" And she ate it all up.\n\nFeeling tired, she tried the chairs. Papa Bear\'s was too hard. Mama Bear\'s was too soft. Baby Bear\'s was just right—CRACK! It broke into pieces!\n\nUpstairs, Goldilocks found three beds. Papa Bear\'s was too firm. Mama Bear\'s was too squishy. Baby Bear\'s was just right, and she fell fast asleep.\n\nThe bears came home and discovered the mess! "Someone\'s been eating my porridge!" growled Papa. "Someone\'s been sitting in my chair!" said Mama. "Someone\'s been sleeping in my bed—AND SHE\'S STILL THERE!" cried Baby Bear.\n\nGoldilocks woke up, saw three bears, and jumped out the window! She ran home and never entered a stranger\'s house again.\n\nThe bears fixed Baby Bear\'s chair and lived happily ever after.\n\n✨ Moral: Always respect other people\'s belongings.',
+      rating: 4.7,
+      isFavorite: false
+    },
+    {
+      id: '53',
+      title: 'Jack and the Beanstalk',
+      genre: 'Fairy tales',
+      duration: '5 min',
+      ageRange: '4-8',
+      coverImage: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600',
+      text: 'Jack and his mother were very poor. "Take our cow to market and sell her," said his mother sadly.\n\nOn the way, Jack met a strange man who offered magic beans for the cow. Jack agreed! His mother was furious and threw the beans out the window.\n\nOvernight, a GIANT beanstalk grew up, up, up into the clouds! Curious Jack climbed all the way to the top and found an enormous castle.\n\nInside lived a giant and his wife. "FEE FI FO FUM!" thundered the giant. Jack hid quickly! He watched the giant count golden coins, play a harp that sang by itself, and pet a goose that laid golden eggs.\n\nWhen the giant fell asleep, Jack grabbed the goose and climbed down. The giant woke and followed! "FEE FI FO FUM! I\'ll catch you, little one!"\n\nJack reached the ground first. "Mother, bring the axe!" CHOP CHOP CHOP! The beanstalk fell, and the giant tumbled back into the clouds, never to be seen again.\n\nWith the golden goose, Jack and his mother were never poor again. And sometimes, when the wind blew, Jack swore he could still hear the giant\'s distant grumbling.\n\n✨ Moral: Courage and quick thinking can change your life.',
+      rating: 4.9,
+      isFavorite: false
+    },
+    {
+      id: '54',
+      title: 'Dumbo the Flying Elephant',
+      genre: 'Animals',
+      duration: '5 min',
+      ageRange: '3-7',
+      coverImage: 'https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=600',
+      text: 'In a circus, a baby elephant was born with the biggest ears anyone had ever seen. The other elephants called him "Dumbo" and laughed at him. Only his loving mother believed he was special.\n\nPoor Dumbo felt sad and alone. His ears were so big he tripped over them! The circus made him a clown, which hurt his feelings even more.\n\nOne night, Dumbo\'s only friend, a brave little mouse named Timothy, discovered something amazing. "Dumbo, your ears aren\'t a problem—they\'re WINGS! You can FLY!"\n\nDumbo didn\'t believe it. Timothy gave him a "magic feather." "Hold this, and you can fly!" Dumbo held the feather tightly, flapped his enormous ears, and lifted off the ground!\n\nAt the next show, Dumbo was supposed to fall from a high platform. But instead, he spread his ears and SOARED! The audience gasped, then cheered wildly!\n\nDumbo became the most famous elephant in the world. But the best part? He was reunited with his mother, and no one ever laughed at his ears again.\n\nTimothy smiled. "I knew you were special all along, buddy."\n\n✨ Moral: What makes you different makes you special.',
+      rating: 5.0,
+      isFavorite: false
+    },
+    {
+      id: '55',
+      title: 'Bambi',
+      genre: 'Animals',
+      duration: '5 min',
+      ageRange: '4-8',
+      coverImage: 'https://images.unsplash.com/photo-1484406566174-9da000fda645?w=600',
+      text: 'In a beautiful forest, a fawn named Bambi was born. All the animals came to see the young prince! His mother taught him about the meadow, the seasons, and staying safe.\n\nBambi made wonderful friends: Thumper the rabbit and Flower the skunk. They played together, explored together, and learned about the forest.\n\n"If you can\'t say something nice, don\'t say nothing at all," Thumper\'s mother always reminded him.\n\nBut the forest held dangers too. Bambi\'s mother warned him about "Man." One terrible winter day, hunters came. "Run, Bambi! Don\'t look back!" His mother didn\'t make it home that day.\n\nSad and alone, Bambi was found by the Great Prince of the Forest—his father. "You must learn to be brave," the Prince said gently.\n\nSeasons passed. Bambi grew strong and wise. He fell in love with a beautiful doe named Faline. When a forest fire threatened everyone, Bambi bravely led the animals to safety.\n\nYears later, Bambi became the Great Prince himself. One spring morning, the animals gathered again—this time to celebrate Bambi\'s own twin fawns.\n\nThe circle of life continued beautifully.\n\n✨ Moral: Life has sadness and joy—both help us grow.',
+      rating: 4.9,
+      isFavorite: false
+    },
+    {
+      id: '56',
+      title: 'The Ugly Duckling',
+      genre: 'Moral stories',
+      duration: '4 min',
+      ageRange: '3-7',
+      coverImage: 'https://images.unsplash.com/photo-1459682687441-7761439a709d?w=600',
+      text: 'On a farm, a mother duck hatched her eggs. Out popped fluffy yellow ducklings... and one large, gray, awkward bird. "What an ugly duckling!" the others quacked.\n\nThe poor duckling was pushed away, pecked at, and teased. Even the chickens and turkeys were mean to him. Heartbroken, he ran away.\n\nThrough summer, fall, and cold winter, the ugly duckling wandered alone. He nearly froze on an icy pond until a kind farmer rescued him.\n\nWhen spring arrived, the duckling saw beautiful white birds gliding gracefully on a lake. "I wish I could be like them," he sighed.\n\nHe swam toward them, expecting to be chased away. But the beautiful birds welcomed him warmly! Confused, he looked down at his reflection—and gasped!\n\nHe wasn\'t an ugly duckling anymore. He was a beautiful white SWAN! The most graceful bird of all!\n\n"Welcome, brother!" the swans said kindly. "You belong with us."\n\nChildren by the lake pointed and said, "Look at the new swan—he\'s the most beautiful one of all!"\n\nThe swan remembered his hard journey and knew that everything had led him here. He had always been beautiful—just different.\n\n✨ Moral: True beauty takes time to reveal itself. Be patient with yourself.',
+      rating: 4.9,
+      isFavorite: false
+    },
+    {
+      id: '57',
+      title: 'The Princess and the Frog',
+      genre: 'Fairy tales',
+      duration: '5 min',
+      ageRange: '4-8',
+      coverImage: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600',
+      text: 'In New Orleans lived a hardworking girl named Tiana who dreamed of opening her own restaurant. She worked day and night, saving every penny.\n\nOne evening, at a costume ball, Tiana met a talking frog! "I\'m actually Prince Naveen," he explained. "An evil witch cursed me! A kiss from a princess will break the spell!"\n\nTiana wasn\'t a princess, but she was wearing a princess costume. When she kissed him—POOF! Instead of turning him human, SHE became a frog too!\n\n"This is NOT what I planned!" Tiana croaked.\n\nTogether, the two frogs journeyed through the Louisiana bayou to find Mama Odie, a good voodoo queen. Along the way, they met Louis the trumpet-playing alligator and Ray the romantic firefly.\n\nTiana and Naveen argued at first—she thought he was lazy; he thought she was too serious. But slowly, they saw each other\'s hearts and fell in love.\n\nMama Odie taught them: "You need to dig a little deeper to find what you need!" True love\'s kiss finally broke the spell!\n\nTiana opened her restaurant, and it became the best in New Orleans. Naveen proved that love had taught him to work hard. Together, they achieved their dreams.\n\n✨ Moral: Dreams come true through hard work and love.',
+      rating: 4.9,
+      isFavorite: false
+    },
+    {
+      id: '58',
+      title: 'Moana',
+      genre: 'Adventures',
+      duration: '6 min',
+      ageRange: '4-8',
+      coverImage: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600',
+      text: 'On the island of Motunui lived a brave girl named Moana. Though her father forbade anyone from sailing beyond the reef, the ocean called to her heart.\n\nWhen darkness began spreading across the islands—killing plants and driving away fish—Moana learned the truth. Long ago, the demigod Maui stole the heart of Te Fiti, the island goddess, causing this curse. Only returning the heart could save everyone.\n\nThe ocean chose Moana for this quest! She sailed beyond the reef for the first time, facing storms and finding Maui on a remote island.\n\n"I am Moana of Motunui. You will board my boat, and restore the heart of Te Fiti!" she declared.\n\nMaui was arrogant at first, but Moana\'s determination inspired him. Together, they faced Tamatoa the giant crab and the lava monster Te Ka.\n\nWhen all seemed lost, Moana realized Te Ka WAS Te Fiti—transformed by losing her heart! Bravely, Moana walked toward the monster.\n\n"I know who you are," she said gently, pressing the heart back where it belonged.\n\nTe Fiti was restored! Life returned to all the islands. Moana sailed home a hero and taught her people to voyage again.\n\n"The ocean connects us all," she smiled.\n\n✨ Moral: Listen to your heart and have courage to follow your calling.',
+      rating: 5.0,
+      isFavorite: false
+    },
+    {
+      id: '59',
+      title: 'Toy Story',
+      genre: 'Adventures',
+      duration: '6 min',
+      ageRange: '3-8',
+      coverImage: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600',
+      text: 'In Andy\'s room, toys came alive when no one was watching! Woody the cowboy was Andy\'s favorite—he got the special spot on the bed and led all the other toys.\n\nBut on Andy\'s birthday, a new toy arrived: Buzz Lightyear, a space ranger who didn\'t know he was a toy! "I\'m Buzz Lightyear, Space Ranger!"\n\nWoody was jealous. Buzz got all the attention now! When Woody accidentally knocked Buzz out the window, the other toys were angry. "You pushed him on purpose!"\n\nWoody chased after Buzz, but they both ended up at Sid\'s house—a neighbor boy who destroyed toys! Woody and Buzz had to work together to escape.\n\nDuring their adventure, Buzz discovered he truly was a toy. He felt devastated. But Woody helped him understand: "Being a toy is the greatest thing. You make a child happy!"\n\nBuzz smiled. "You\'re right, Woody."\n\nThey escaped Sid\'s house just as Andy\'s family was moving! Racing after the moving truck, Woody and Buzz became best friends. They landed safely in Andy\'s car.\n\nAndy hugged both toys. "I found them! My two favorite toys!"\n\nWoody and Buzz shared a smile. They were partners now.\n\n✨ Moral: Friendship is more important than being #1.',
+      rating: 5.0,
+      isFavorite: false
+    },
+    {
+      id: '60',
+      title: 'The Tortoise and the Hare',
+      genre: 'Moral stories',
+      duration: '3 min',
+      ageRange: '2-6',
+      coverImage: 'https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=600',
+      text: 'In a sunny meadow, a hare bragged constantly about his speed. "I\'m the fastest animal alive! No one can beat me!"\n\nA slow tortoise listened quietly and finally said, "I\'ll race you."\n\nEveryone laughed! "A tortoise racing a hare? Impossible!"\n\nThe race began. The hare zoomed ahead, leaving the tortoise far behind. Looking back, he laughed. "This is too easy! I\'ll take a little nap."\n\nThe hare stretched under a shady tree and fell asleep. Meanwhile, the tortoise kept walking—slow and steady, step by step, never stopping.\n\nHours passed. When the hare finally woke up, he saw the tortoise was almost at the finish line!\n\n"No! No! No!" The hare ran as fast as he could, but it was too late.\n\nThe tortoise crossed the finish line first!\n\nAll the animals cheered! The tortoise smiled calmly. "I may be slow, but I never gave up."\n\nThe embarrassed hare learned an important lesson that day. He never bragged or underestimated anyone again.\n\n✨ Moral: Slow and steady wins the race.',
+      rating: 4.9,
+      isFavorite: false
     }
   ]);
 
