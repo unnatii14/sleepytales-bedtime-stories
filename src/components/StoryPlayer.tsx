@@ -69,61 +69,41 @@ export function StoryPlayer({ story, allStories, onNavigate, onToggleFavorite, o
   useEffect(() => {
     if (!voicesLoaded) return;
 
-    // Add natural pauses and emphasis for storytelling
-    let expressiveText = storyContent
-      // Add pauses after sentences for dramatic effect
-      .replace(/\. /g, '... ')
-      .replace(/! /g, '!... ')
-      .replace(/\? /g, '?... ')
-      // Add emphasis to exclamations and questions
-      .replace(/!/g, '!')
-      .replace(/\?/g, '?');
-    
-    utterance.current = new SpeechSynthesisUtterance(expressiveText);
+    // Create new utterance with story content
+    utterance.current = new SpeechSynthesisUtterance(storyContent);
     utterance.current.lang = 'en-US';
-    utterance.current.rate = 0.75; // Even slower for expressive storytelling
-    utterance.current.pitch = 1.4; // Higher, warmer pitch
-    utterance.current.volume = 0.95;
+    utterance.current.rate = 0.8; // Comfortable storytelling pace
+    utterance.current.pitch = 1.2; // Slightly higher, friendly pitch
+    utterance.current.volume = 1.0;
     
     // Get available voices
     const voices = synth.current.getVoices();
-    console.log('Available voices:', voices.map(v => `${v.name} (${v.lang})`));
     
-    // Prioritize voices known for better expression
-    let childFriendlyVoice = voices.find(voice => 
-      voice.name.includes('Samantha') || // Mac - very expressive
-      voice.name.includes('Victoria') || // Windows - warm
-      voice.name.includes('Zira') || // Windows - friendly
-      voice.name.includes('Google UK English Female') || // Chrome - natural
-      voice.name.includes('Karen') // iOS - pleasant
-    );
-
-    // Fallback to any English female voice
-    if (!childFriendlyVoice) {
-      childFriendlyVoice = voices.find(voice => 
-        voice.lang.startsWith('en') && 
-        (voice.name.toLowerCase().includes('female') || voice.name.toLowerCase().includes('woman'))
-      );
-    }
-
-    // Fallback to any English voice
-    if (!childFriendlyVoice) {
-      childFriendlyVoice = voices.find(voice => voice.lang.startsWith('en'));
-    }
-
-    // Fallback to default voice
-    if (!childFriendlyVoice && voices.length > 0) {
-      childFriendlyVoice = voices[0];
-    }
-    
-    if (childFriendlyVoice) {
-      utterance.current.voice = childFriendlyVoice;
-      console.log('Selected voice:', childFriendlyVoice.name);
-    } else {
-      console.log('Using default system voice');
+    if (voices.length > 0) {
+      // Select best child-friendly voice with multiple fallbacks
+      const selectedVoice = 
+        voices.find(v => v.name.includes('Zira') && v.lang.startsWith('en')) || // Windows female
+        voices.find(v => v.name.includes('Microsoft Zira')) ||
+        voices.find(v => v.name.includes('Google UK English Female')) || // Chrome female
+        voices.find(v => v.name.includes('Google US English Female')) ||
+        voices.find(v => v.name.includes('Samantha')) || // Mac female
+        voices.find(v => v.name.includes('Karen')) || // Mac female
+        voices.find(v => v.name.includes('Victoria')) || // Windows female
+        voices.find(v => v.lang.startsWith('en') && v.name.toLowerCase().includes('female')) ||
+        voices.find(v => v.lang.startsWith('en')) ||
+        voices[0]; // Ultimate fallback
+      
+      if (selectedVoice) {
+        utterance.current.voice = selectedVoice;
+      }
     }
     
     utterance.current.onend = () => {
+      setIsPlaying(false);
+    };
+
+    utterance.current.onerror = (error) => {
+      console.error('Speech synthesis error:', error);
       setIsPlaying(false);
     };
 
@@ -432,7 +412,7 @@ export function StoryPlayer({ story, allStories, onNavigate, onToggleFavorite, o
               className="mt-4 text-center"
             >
               <p className="text-[#A8C7FF] text-xs sm:text-sm">
-                \ud83d\udd0a Audio reading in progress...
+                🔊 Audio reading in progress...
               </p>
             </motion.div>
           )}
