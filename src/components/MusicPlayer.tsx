@@ -35,11 +35,37 @@ export function MusicPlayer({ musicTracks, rhymes, onNavigate }: MusicPlayerProp
   const [currentRhyme, setCurrentRhyme] = useState<Rhyme | null>(null);
   const [volume, setVolume] = useState(70);
   const [activeTab, setActiveTab] = useState<'sounds' | 'rhymes'>('rhymes');
+  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
+  const [selectedVoiceURI, setSelectedVoiceURI] = useState<string>('');
   const audioContextRef = useRef<AudioContext | null>(null);
   const oscillatorRef = useRef<OscillatorNode | null>(null);
   const gainNodeRef = useRef<GainNode | null>(null);
   const synthRef = useRef<SpeechSynthesis>(window.speechSynthesis);
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+  // Load voices and set best default
+  useEffect(() => {
+    function loadVoices() {
+      const allVoices = synthRef.current.getVoices();
+      setVoices(allVoices);
+      // Try to pick a child-friendly female English voice
+      const preferred =
+        allVoices.find(v => v.name.toLowerCase().includes('child')) ||
+        allVoices.find(v => v.name.includes('Zira')) ||
+        allVoices.find(v => v.name.includes('Google UK English Female')) ||
+        allVoices.find(v => v.name.includes('Samantha')) ||
+        allVoices.find(v => v.lang.startsWith('en') && v.name.toLowerCase().includes('female')) ||
+        allVoices.find(v => v.lang.startsWith('en')) ||
+        allVoices[0];
+      if (preferred) setSelectedVoiceURI(preferred.voiceURI);
+    }
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
+      if (synthRef.current.getVoices().length === 0) {
+        window.speechSynthesis.onvoiceschanged = loadVoices;
+      } else {
+        loadVoices();
+      }
+    }
+  }, []);
 
   useEffect(() => {
     // Initialize Web Audio API
@@ -210,25 +236,18 @@ export function MusicPlayer({ musicTracks, rhymes, onNavigate }: MusicPlayerProp
     } else {
       // Stop any other rhyme and play this one
       synthRef.current.cancel();
-      
+
       utteranceRef.current = new SpeechSynthesisUtterance(rhyme.lyrics);
       utteranceRef.current.lang = 'en-US';
-      utteranceRef.current.rate = 0.85;
-      utteranceRef.current.pitch = 1.3;
+      utteranceRef.current.rate = 0.92; // slightly faster for more natural
+      utteranceRef.current.pitch = 1.4; // higher pitch for childlike
       utteranceRef.current.volume = volume / 100;
 
-      // Select child-friendly voice
-      const voices = synthRef.current.getVoices();
-      const selectedVoice = 
-        voices.find(v => v.name.includes('Zira')) ||
-        voices.find(v => v.name.includes('Google UK English Female')) ||
-        voices.find(v => v.name.includes('Samantha')) ||
-        voices.find(v => v.lang.startsWith('en') && v.name.toLowerCase().includes('female')) ||
-        voices.find(v => v.lang.startsWith('en')) ||
-        voices[0];
-      
-      if (selectedVoice) {
-        utteranceRef.current.voice = selectedVoice;
+      // Use selected voice if available
+      const allVoices = synthRef.current.getVoices();
+      const selected = allVoices.find(v => v.voiceURI === selectedVoiceURI) || allVoices[0];
+      if (selected) {
+        utteranceRef.current.voice = selected;
       }
 
       utteranceRef.current.onend = () => {
@@ -237,7 +256,7 @@ export function MusicPlayer({ musicTracks, rhymes, onNavigate }: MusicPlayerProp
       };
 
       synthRef.current.speak(utteranceRef.current);
-      
+
       setRhymeList(rhymeList.map(r => ({
         ...r,
         isPlaying: r.id === rhymeId
@@ -246,21 +265,37 @@ export function MusicPlayer({ musicTracks, rhymes, onNavigate }: MusicPlayerProp
     }
   };
 
+
   return (
     <div className="min-h-screen pb-24 px-4 sm:px-6">
+      {/* Navigation Bar */}
+      <div className="flex items-center gap-3 pt-6 pb-2">
+        <button
+          onClick={() => onNavigate('home')}
+          className="flex items-center gap-2 text-[#A8C7FF] hover:text-[#F8EDEB] text-base font-medium px-3 py-2 rounded-lg transition-colors"
+        >
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.75 19.5L8.25 12l7.5-7.5" />
+          </svg>
+          <span>Stories</span>
+        </button>
+        <span className="text-[#5B84D8] font-bold text-lg">/</span>
+        <span className="text-[#F8EDEB] font-semibold text-lg">Music & Rhymes</span>
+      </div>
+
       {/* Header */}
-      <div className="pt-8 sm:pt-12 pb-4 sm:pb-6">
+      <div className="pt-2 sm:pt-4 pb-4 sm:pb-6">
         <h1 className="text-[#F8EDEB] text-2xl sm:text-3xl mb-2">Music & Rhymes</h1>
         <p className="text-[#A8C7FF] text-sm sm:text-base">Soothing sounds and nursery rhymes</p>
       </div>
 
       {/* Tab Buttons */}
-      <div className="flex gap-2 mb-6">
+      <div className="flex gap-2 mb-8">
         <button
           onClick={() => setActiveTab('rhymes')}
           className={`flex-1 py-3 px-4 rounded-xl font-medium transition-all ${
             activeTab === 'rhymes'
-              ? 'bg-[#5B84D8] text-[#F8EDEB]'
+              ? 'bg-[#5B84D8] text-[#F8EDEB] shadow-lg shadow-[#5B84D8]/20'
               : 'bg-[#162B5B]/60 text-[#A8C7FF] border border-[#5B84D8]/20'
           }`}
         >
@@ -270,12 +305,23 @@ export function MusicPlayer({ musicTracks, rhymes, onNavigate }: MusicPlayerProp
           onClick={() => setActiveTab('sounds')}
           className={`flex-1 py-3 px-4 rounded-xl font-medium transition-all ${
             activeTab === 'sounds'
-              ? 'bg-[#5B84D8] text-[#F8EDEB]'
+              ? 'bg-[#5B84D8] text-[#F8EDEB] shadow-lg shadow-[#5B84D8]/20'
               : 'bg-[#162B5B]/60 text-[#A8C7FF] border border-[#5B84D8]/20'
           }`}
         >
           🎧 Sleep Sounds
         </button>
+      </div>
+
+      {/* Section Divider */}
+      <div className="mb-8">
+        <div className="flex items-center justify-center">
+          <div className="h-px bg-[#5B84D8]/30 w-full max-w-2xl" />
+          <span className="mx-4 text-[#A8C7FF] text-xs uppercase tracking-widest font-semibold">
+            {activeTab === 'rhymes' ? 'Nursery Rhymes' : 'Sleep Sounds'}
+          </span>
+          <div className="h-px bg-[#5B84D8]/30 w-full max-w-2xl" />
+        </div>
       </div>
 
       {/* Current Playing */}
@@ -352,64 +398,81 @@ export function MusicPlayer({ musicTracks, rhymes, onNavigate }: MusicPlayerProp
 
       {/* Nursery Rhymes Section */}
       {activeTab === 'rhymes' && (
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-          {rhymeList.map((rhyme, index) => (
-            <motion.button
-              key={rhyme.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: index * 0.05 }}
-              onClick={() => handlePlayRhyme(rhyme.id)}
-              className={`relative overflow-hidden rounded-xl sm:rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2 sm:gap-3 transition-all active:scale-95 ${
-                rhyme.isPlaying
-                  ? 'bg-gradient-to-br from-[#5B84D8] to-[#162B5B] border-2 border-[#5B84D8]'
-                  : 'bg-[#162B5B]/60 backdrop-blur-sm border border-[#5B84D8]/20 hover:border-[#5B84D8]/40'
-              }`}
+        <>
+          {/* Voice Picker */}
+          <div className="mb-6 flex flex-col sm:flex-row items-center gap-3">
+            <label className="text-[#A8C7FF] text-sm font-medium mr-2">Choose Voice:</label>
+            <select
+              className="bg-[#162B5B] border border-[#5B84D8]/40 text-[#F8EDEB] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#5B84D8]"
+              value={selectedVoiceURI}
+              onChange={e => setSelectedVoiceURI(e.target.value)}
             >
-              {rhyme.isPlaying && (
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-br from-[#5B84D8]/20 to-transparent"
-                  animate={{
-                    opacity: [0.3, 0.6, 0.3],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                />
-              )}
+              {voices.map(v => (
+                <option key={v.voiceURI} value={v.voiceURI}>
+                  {v.name} {v.lang ? `(${v.lang})` : ''}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+            {rhymeList.map((rhyme, index) => (
+              <motion.button
+                key={rhyme.id}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.05 }}
+                onClick={() => handlePlayRhyme(rhyme.id)}
+                className={`relative overflow-hidden rounded-xl sm:rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2 sm:gap-3 transition-all active:scale-95 ${
+                  rhyme.isPlaying
+                    ? 'bg-gradient-to-br from-[#5B84D8] to-[#162B5B] border-2 border-[#5B84D8]'
+                    : 'bg-[#162B5B]/60 backdrop-blur-sm border border-[#5B84D8]/20 hover:border-[#5B84D8]/40'
+                }`}
+              >
+                {rhyme.isPlaying && (
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-br from-[#5B84D8]/20 to-transparent"
+                    animate={{
+                      opacity: [0.3, 0.6, 0.3],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                )}
 
-              <div className="relative z-10 text-center">
-                <motion.div
-                  animate={rhyme.isPlaying ? {
-                    scale: [1, 1.1, 1],
-                  } : {}}
-                  transition={{
-                    duration: 1,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                  className="text-4xl sm:text-5xl mb-2"
-                >
-                  {rhyme.emoji}
-                </motion.div>
+                <div className="relative z-10 text-center">
+                  <motion.div
+                    animate={rhyme.isPlaying ? {
+                      scale: [1, 1.1, 1],
+                    } : {}}
+                    transition={{
+                      duration: 1,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                    className="text-4xl sm:text-5xl mb-2"
+                  >
+                    {rhyme.emoji}
+                  </motion.div>
 
-                <h3 className="text-[#F8EDEB] text-center mb-2 text-xs sm:text-sm font-medium line-clamp-2">{rhyme.title}</h3>
+                  <h3 className="text-[#F8EDEB] text-center mb-2 text-xs sm:text-sm font-medium line-clamp-2">{rhyme.title}</h3>
 
-                <div className={`w-10 h-10 sm:w-12 sm:h-12 mx-auto bg-[#F8EDEB]/10 rounded-full flex items-center justify-center ${
-                  rhyme.isPlaying ? 'bg-[#F8EDEB]/20' : ''
-                }`}>
-                  {rhyme.isPlaying ? (
-                    <Pause className="w-5 h-5 sm:w-6 sm:h-6 text-[#F8EDEB]" />
-                  ) : (
-                    <Play className="w-5 h-5 sm:w-6 sm:h-6 text-[#F8EDEB]" />
-                  )}
+                  <div className={`w-10 h-10 sm:w-12 sm:h-12 mx-auto bg-[#F8EDEB]/10 rounded-full flex items-center justify-center ${
+                    rhyme.isPlaying ? 'bg-[#F8EDEB]/20' : ''
+                  }`}>
+                    {rhyme.isPlaying ? (
+                      <Pause className="w-5 h-5 sm:w-6 sm:h-6 text-[#F8EDEB]" />
+                    ) : (
+                      <Play className="w-5 h-5 sm:w-6 sm:h-6 text-[#F8EDEB]" />
+                    )}
+                  </div>
                 </div>
-              </div>
-            </motion.button>
-          ))}
-        </div>
+              </motion.button>
+            ))}
+          </div>
+        </>
       )}
 
       {/* Sleep Sounds Section */}
