@@ -1,0 +1,6 @@
+{
+  "appId": "com.sleepytales.app",
+  "appName": "SleepyTales",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
