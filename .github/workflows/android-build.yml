@@ -1,0 +1,74 @@
+name: Build Android AAB
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build web (Vite)
+      run: npm run build
+
+    - name: Install Capacitor CLI
+      run: npm install @capacitor/cli @capacitor/core --no-save
+
+    - name: Copy web assets to native
+      run: npx cap copy android
+
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Decode keystore
+      if: ${{ secrets.KEYSTORE_BASE64 }}
+      run: |
+        mkdir -p android/keystore
+        echo "$KEYSTORE_BASE64" | base64 --decode > android/keystore/keystore.jks
+      env:
+        KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+
+    - name: Create keystore.properties
+      if: ${{ secrets.KEYSTORE_BASE64 }}
+      run: |
+        cat > android/keystore.properties <<EOF
+        storeFile=keystore/keystore.jks
+        storePassword=${{ secrets.KEYSTORE_PASSWORD }}
+        keyAlias=${{ secrets.KEY_ALIAS }}
+        keyPassword=${{ secrets.KEY_PASSWORD }}
+        EOF
+
+    - name: Build Android AAB
+      working-directory: android
+      run: ./gradlew bundleRelease --no-daemon
+
+    - name: Upload AAB artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: app-release.aab
+        path: android/app/build/outputs/bundle/release/app-release.aab
+
+    - name: Publish to Internal Track (optional)
+      if: ${{ secrets.PLAY_STORE_SERVICE_ACCOUNT }}
+      uses: r0adkll/upload-google-play@v1
+      with:
+        serviceAccountJsonPlainText: ${{ secrets.PLAY_STORE_SERVICE_ACCOUNT }}
+        packageName: com.sleepytales.app
+        releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
+        track: internal

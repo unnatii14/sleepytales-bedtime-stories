@@ -26,3 +26,7 @@ dist-ssr
 
 # Vite
 .vite
+
+# Android keystore and signing
+android/keystore/
+android/keystore.properties
