@@ -34,7 +34,6 @@ export function MusicPlayer({ musicTracks, rhymes, onNavigate }: MusicPlayerProp
   const [currentTrack, setCurrentTrack] = useState<Music | null>(null);
   const [currentRhyme, setCurrentRhyme] = useState<Rhyme | null>(null);
   const [volume, setVolume] = useState(70);
-  const [activeTab, setActiveTab] = useState<'sounds' | 'rhymes'>('rhymes');
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const oscillatorRef = useRef<OscillatorNode | null>(null);
@@ -265,7 +264,7 @@ export function MusicPlayer({ musicTracks, rhymes, onNavigate }: MusicPlayerProp
 
   return (
     <div className="min-h-screen pb-24 px-2 sm:px-4 flex flex-col items-center">
-      <div className="w-full max-w-2xl bg-[#0B2545]/80 border border-[#5B84D8]/30 rounded-3xl shadow-2xl shadow-[#0B2545]/30 p-4 sm:p-8 mt-6 mb-8">
+      <div className="w-full max-w-5xl mx-auto bg-[#0B2545]/80 border border-[#5B84D8]/30 rounded-3xl shadow-2xl shadow-[#0B2545]/30 p-4 sm:p-8 mt-6 mb-8">
         {/* Navigation Bar */}
         <div className="flex items-center gap-3 pt-2 pb-2">
           <button
@@ -282,44 +281,11 @@ export function MusicPlayer({ musicTracks, rhymes, onNavigate }: MusicPlayerProp
         </div>
 
         {/* Header */}
-        <div className="pt-2 sm:pt-4 pb-4 sm:pb-6">
+        <div className="pt-2 sm:pt-4 pb-6 sm:pb-8 text-center">
           <h1 className="text-[#F8EDEB] text-2xl sm:text-3xl mb-2">Music & Rhymes</h1>
-          <p className="text-[#A8C7FF] text-sm sm:text-base">Soothing sounds and nursery rhymes</p>
-        </div>
-
-        {/* Tab Buttons */}
-        <div className="flex gap-2 mb-8">
-          <button
-            onClick={() => setActiveTab('rhymes')}
-            className={`flex-1 py-3 px-4 rounded-xl font-medium transition-all ${
-              activeTab === 'rhymes'
-                ? 'bg-[#5B84D8] text-[#F8EDEB] shadow-lg shadow-[#5B84D8]/20'
-                : 'bg-[#162B5B]/60 text-[#A8C7FF] border border-[#5B84D8]/20'
-            }`}
-          >
-            🎵 Nursery Rhymes
-          </button>
-          <button
-            onClick={() => setActiveTab('sounds')}
-            className={`flex-1 py-3 px-4 rounded-xl font-medium transition-all ${
-              activeTab === 'sounds'
-                ? 'bg-[#5B84D8] text-[#F8EDEB] shadow-lg shadow-[#5B84D8]/20'
-                : 'bg-[#162B5B]/60 text-[#A8C7FF] border border-[#5B84D8]/20'
-            }`}
-          >
-            🎧 Sleep Sounds
-          </button>
-        </div>
-
-        {/* Section Divider */}
-        <div className="mb-8">
-          <div className="flex items-center justify-center">
-            <div className="h-px bg-[#5B84D8]/30 w-full max-w-2xl" />
-            <span className="mx-4 text-[#A8C7FF] text-xs uppercase tracking-widest font-semibold">
-              {activeTab === 'rhymes' ? 'Nursery Rhymes' : 'Sleep Sounds'}
-            </span>
-            <div className="h-px bg-[#5B84D8]/30 w-full max-w-2xl" />
-          </div>
+          <p className="text-[#A8C7FF] text-sm sm:text-base">
+            Soothing nursery rhymes and calming sleep sounds, side by side.
+          </p>
         </div>
 
         {/* Current Playing */}
@@ -394,11 +360,14 @@ export function MusicPlayer({ musicTracks, rhymes, onNavigate }: MusicPlayerProp
           </motion.div>
         )}
 
-        {/* Nursery Rhymes Section */}
-        {activeTab === 'rhymes' && (
-          <>
-            <div className="mb-4">
-              <h2 className="text-[#A8C7FF] text-lg font-semibold border-b border-[#5B84D8]/30 pb-2 mb-2">Nursery Rhymes</h2>
+        {/* Main Content: Rhymes & Sounds - stacked and centered */}
+        <div className="flex flex-col gap-10 items-center">
+          {/* Nursery Rhymes Section */}
+          <div className="w-full max-w-2xl">
+            <div className="mb-4 text-center">
+              <h2 className="text-[#A8C7FF] text-lg font-semibold border-b border-[#5B84D8]/30 pb-2 mb-2 inline-block">
+                🎵 Nursery Rhymes
+              </h2>
             </div>
             {/* Audio element for rhyme playback (always rendered, src set by play handler) */}
             <audio
@@ -409,7 +378,7 @@ export function MusicPlayer({ musicTracks, rhymes, onNavigate }: MusicPlayerProp
               }}
               style={{ display: 'none' }}
             />
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+            <div className="space-y-3 sm:space-y-4">
               {rhymeList.map((rhyme, index) => (
                 <motion.button
                   key={rhyme.id}
@@ -417,7 +386,7 @@ export function MusicPlayer({ musicTracks, rhymes, onNavigate }: MusicPlayerProp
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: index * 0.05 }}
                   onClick={() => handlePlayRhyme(rhyme.id)}
-                  className={`relative overflow-hidden rounded-xl sm:rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2 sm:gap-3 transition-all active:scale-95 ${
+                  className={`w-full relative overflow-hidden rounded-2xl px-4 py-3 sm:px-6 sm:py-4 flex items-center justify-between gap-4 transition-all active:scale-95 ${
                     rhyme.isPlaying
                       ? 'bg-gradient-to-br from-[#5B84D8] to-[#162B5B] border-2 border-[#5B84D8]'
                       : 'bg-[#162B5B]/60 backdrop-blur-sm border border-[#5B84D8]/20 hover:border-[#5B84D8]/40'
@@ -437,46 +406,42 @@ export function MusicPlayer({ musicTracks, rhymes, onNavigate }: MusicPlayerProp
                     />
                   )}
 
-                  <div className="relative z-10 text-center">
-                    <motion.div
-                      animate={rhyme.isPlaying ? {
-                        scale: [1, 1.1, 1],
-                      } : {}}
-                      transition={{
-                        duration: 1,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                      className="text-4xl sm:text-5xl mb-2"
-                    >
+                  <div className="relative z-10 flex items-center gap-3 sm:gap-4 flex-1">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#F8EDEB]/10 flex items-center justify-center text-2xl sm:text-3xl">
                       {rhyme.emoji}
-                    </motion.div>
-
-                    <h3 className="text-[#F8EDEB] text-center mb-2 text-xs sm:text-sm font-medium line-clamp-2">{rhyme.title}</h3>
-
-                    <div className={`w-10 h-10 sm:w-12 sm:h-12 mx-auto bg-[#F8EDEB]/10 rounded-full flex items-center justify-center ${
-                      rhyme.isPlaying ? 'bg-[#F8EDEB]/20' : ''
-                    }`}>
-                      {rhyme.isPlaying ? (
-                        <Pause className="w-5 h-5 sm:w-6 sm:h-6 text-[#F8EDEB]" />
-                      ) : (
-                        <Play className="w-5 h-5 sm:w-6 sm:h-6 text-[#F8EDEB]" />
-                      )}
                     </div>
+                    <div className="text-left">
+                      <h3 className="text-[#F8EDEB] mb-1 text-sm sm:text-base font-medium line-clamp-2">
+                        {rhyme.title}
+                      </h3>
+                      <p className="text-[#A8C7FF] text-xs sm:text-sm">
+                        Tap to play this nursery rhyme
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className={`relative z-10 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#F8EDEB]/10 flex items-center justify-center ${
+                    rhyme.isPlaying ? 'bg-[#F8EDEB]/20' : ''
+                  }`}>
+                    {rhyme.isPlaying ? (
+                      <Pause className="w-4 h-4 sm:w-5 sm:h-5 text-[#F8EDEB]" />
+                    ) : (
+                      <Play className="w-4 h-4 sm:w-5 sm:h-5 text-[#F8EDEB]" />
+                    )}
                   </div>
                 </motion.button>
               ))}
             </div>
-          </>
-        )}
+          </div>
 
-        {/* Sleep Sounds Section */}
-        {activeTab === 'sounds' && (
-          <>
-            <div className="mb-4">
-              <h2 className="text-[#A8C7FF] text-lg font-semibold border-b border-[#5B84D8]/30 pb-2 mb-2">Sleep Sounds</h2>
+          {/* Sleep Sounds Section */}
+          <div className="w-full max-w-2xl">
+            <div className="mb-4 text-center">
+              <h2 className="text-[#A8C7FF] text-lg font-semibold border-b border-[#5B84D8]/30 pb-2 mb-2 inline-block">
+                🎧 Sleep Sounds
+              </h2>
             </div>
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+            <div className="space-y-3 sm:space-y-4">
               {tracks.map((track, index) => {
                 const Icon = iconMap[track.icon];
 
@@ -487,7 +452,7 @@ export function MusicPlayer({ musicTracks, rhymes, onNavigate }: MusicPlayerProp
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: index * 0.05 }}
                     onClick={() => handleTogglePlay(track.id)}
-                    className={`relative overflow-hidden rounded-xl sm:rounded-2xl p-4 sm:p-6 aspect-square flex flex-col items-center justify-center gap-3 sm:gap-4 transition-all active:scale-95 ${
+                    className={`w-full relative overflow-hidden rounded-2xl px-4 py-3 sm:px-6 sm:py-4 flex items-center justify-between gap-4 transition-all active:scale-95 ${
                       track.isPlaying
                         ? 'bg-gradient-to-br from-[#5B84D8] to-[#162B5B] border-2 border-[#5B84D8]'
                         : 'bg-[#162B5B]/60 backdrop-blur-sm border border-[#5B84D8]/20 hover:border-[#5B84D8]/40'
@@ -507,7 +472,7 @@ export function MusicPlayer({ musicTracks, rhymes, onNavigate }: MusicPlayerProp
                       />
                     )}
 
-                    <div className="relative z-10">
+                    <div className="relative z-10 flex items-center gap-3 sm:gap-4 flex-1">
                       <motion.div
                         animate={track.isPlaying ? {
                           rotate: [0, 360],
@@ -517,30 +482,36 @@ export function MusicPlayer({ musicTracks, rhymes, onNavigate }: MusicPlayerProp
                           repeat: Infinity,
                           ease: "linear"
                         }}
-                        className="w-14 h-14 sm:w-16 sm:h-16 bg-[#F8EDEB]/20 rounded-full flex items-center justify-center mb-2"
+                        className="w-10 h-10 sm:w-12 sm:h-12 bg-[#F8EDEB]/20 rounded-full flex items-center justify-center"
                       >
                         <Icon className="w-7 h-7 sm:w-8 sm:h-8 text-[#F8EDEB]" />
                       </motion.div>
 
-                      <h3 className="text-[#F8EDEB] text-center mb-1 text-sm sm:text-base">{track.name}</h3>
-                      <p className="text-[#A8C7FF] text-xs sm:text-sm text-center">{track.duration}</p>
-
-                      <div className={`mt-3 sm:mt-4 w-10 h-10 sm:w-12 sm:h-12 mx-auto bg-[#F8EDEB]/10 rounded-full flex items-center justify-center ${
-                        track.isPlaying ? 'bg-[#F8EDEB]/20' : ''
-                      }`}>
-                        {track.isPlaying ? (
-                          <Pause className="w-5 h-5 sm:w-6 sm:h-6 text-[#F8EDEB]" />
-                        ) : (
-                          <Play className="w-5 h-5 sm:w-6 sm:h-6 text-[#F8EDEB]" />
-                        )}
+                      <div className="text-left">
+                        <h3 className="text-[#F8EDEB] mb-1 text-sm sm:text-base font-medium">
+                          {track.name}
+                        </h3>
+                        <p className="text-[#A8C7FF] text-xs sm:text-sm">
+                          {track.duration}
+                        </p>
                       </div>
+                    </div>
+
+                    <div className={`relative z-10 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#F8EDEB]/10 flex items-center justify-center ${
+                      track.isPlaying ? 'bg-[#F8EDEB]/20' : ''
+                    }`}>
+                      {track.isPlaying ? (
+                        <Pause className="w-4 h-4 sm:w-5 sm:h-5 text-[#F8EDEB]" />
+                      ) : (
+                        <Play className="w-4 h-4 sm:w-5 sm:h-5 text-[#F8EDEB]" />
+                      )}
                     </div>
                   </motion.button>
                 );
               })}
             </div>
-          </>
-        )}
+          </div>
+        </div>
       </div>
     </div>
   );
