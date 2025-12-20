@@ -17,7 +17,7 @@ export default defineConfig({
       includeAssets: ['favicon.ico', 'icons/icon-192x192.png', 'icons/icon-512x512.png'],
     }),
   ],
-    base: '/sleepytales-bedtime-stories/',
+    base: process.env.BASE_PATH ?? '/sleepytales-bedtime-stories/',
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
       alias: {
